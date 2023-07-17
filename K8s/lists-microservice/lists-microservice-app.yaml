@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lists-microservice-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lists-microservice-app
+  template:
+    metadata:
+      labels:
+        app: lists-microservice-app
+    spec:
+      containers:
+      - name: lists-microservice-app
+        command: ["uvicorn", "delvify.main:ms", "--host", "0.0.0.0", "--port", "8000"]
+        image: ajijii/lists-microservice
+        ports:
+        - containerPort: 8000
+        envFrom:
+          - configMapRef:
+              name: lists-microservice-config
+          - secretRef:
+              name: lists-microservice-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lists-microservice-app-service
+spec:
+  selector:
+    app: lists-microservice-app
+  ports:
+  - protocol: TCP
+    port: 8003
+    targetPort: 8000

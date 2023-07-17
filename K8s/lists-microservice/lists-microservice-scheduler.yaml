@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lists-microservice-scheduler-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lists-microservice-scheduler
+  template:
+    metadata:
+      labels:
+        app: lists-microservice-scheduler
+    spec:
+      containers:
+      - name: lists-microservice-scheduler
+        command: ["python", "delvify/jobs/main.py"]
+        image: ajijii/lists-microservice
+        envFrom:
+          - configMapRef:
+              name: lists-microservice-config
+          - secretRef:
+              name: lists-microservice-secret

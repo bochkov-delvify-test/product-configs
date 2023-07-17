@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lists-microservice-config
+data:
+  SERVICE_NAME: "lists-microservice"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: lists-microservice-secret
+type: Opaque
+data:
+  SECRET_KEY: "cDlDVEFCRzE2cFMrVWJoZnNnRHpQSHE3MXZjaWphcXc5dmwwMXJaZ3dTS1hqY0RYYURnbGQrd3piY2hRaCtxUVc9PQ=="
+  TOKEN_ALGORITHM: "SFM1MTI="
+  DB_SCHEME: "cG9zdGdyZXNxbA=="
+  DB_USER: "cG9zdGdyZXM="
+  DB_PASSWORD: "cG9zdGdyZXM="
+  DB_HOST: "bGlzdHMtbWljcm9zZXJ2aWNlLWRiLXNlcnZpY2U="
+  DB_PORT: "NTQzMg=="
+  DB_NAME: "bGlzdHMtdGFza3M="
+  POSTGRES_DB: "bGlzdHMtdGFza3M="
+  POSTGRES_PASSWORD: "cG9zdGdyZXM="
+  NOTIFICATION_SERVICE_URL: "aHR0cDovL25vdGlmaWNhdGlvbnMtbWljcm9zZXJ2aWNlLXNlcnZpY2U6ODAwMg=="
