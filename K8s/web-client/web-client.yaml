@@ -15,7 +15,7 @@ spec:
       containers:
       - name: web-client
         command: ["serve", "-s", "."]
-        image: ajijii/todo-web
+        image: ajijii/web-client
         ports:
         - containerPort: 3000
 ---
