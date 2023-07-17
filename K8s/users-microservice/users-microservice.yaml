@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: users-microservice-config
+data:
+  SERVICE_NAME: "users-microservice"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: users-microservice-secret
+type: Opaque
+data:
+  SECRET_KEY: "cDlDVEFCRzE2cFMrVWJoZnNnRHpQSHE3MXZjaWphcXc5dmwwMXJaZ3dTS1hqY0RYYURnbGQrd3piY2hRaCtxUVc9PQ=="
+  TOKEN_ALGORITHM: "SFM1MTI="
+  DB_SCHEME: "cG9zdGdyZXNxbA=="
+  DB_USER: "cG9zdGdyZXM="
+  DB_PASSWORD: "cG9zdGdyZXM="
+  DB_HOST: "dXNlcnMtbWljcm9zZXJ2aWNlLWRiLXNlcnZpY2U="
+  DB_PORT: "NTQzMg=="
+  DB_NAME: "dXNlcnM="
+  POSTGRES_PASSWORD: "cG9zdGdyZXM="
+  POSTGRES_DB: "dXNlcnM="
