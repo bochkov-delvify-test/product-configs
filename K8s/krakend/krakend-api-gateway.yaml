@@ -1,0 +1,386 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: krakend-api-gateway-config
+data:
+  krakend.json: |
+    {
+      "version": 3,
+      "name": "API Gateway",
+      "port": 8080,
+      "cache_ttl": "1s",
+      "timeout": "10s",
+      "extra_config": {
+        "router": {
+          "return_error_msg": true
+        },
+        "headers": {
+          "pass_through": [
+            "Authorization"
+          ]
+        },
+        "security/cors": {
+          "allow_origins": [
+            "*"
+          ],
+          "allow_methods": [
+            "GET",
+            "PUT",
+            "POST",
+            "DELETE",
+            "OPTIONS"
+          ],
+          "expose_headers": [
+            "*"
+          ],
+          "allow_headers": [
+            "*"
+          ],
+          "max_age": "12h",
+          "allow_credentials": false,
+          "debug": true
+        }
+      },
+      "endpoints": [
+        {
+          "endpoint": "/api/v1/users",
+          "input_headers": [
+            "*"
+          ],
+          "method": "POST",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://users-microservice-app-service:8001"
+              ],
+              "url_pattern": "/api/v1/users",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/users/login",
+          "input_headers": [
+            "*"
+          ],
+          "method": "POST",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://users-microservice-app-service:8001"
+              ],
+              "url_pattern": "/api/v1/users/login",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/users/me",
+          "input_headers": [
+            "*"
+          ],
+          "method": "GET",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://users-microservice-app-service:8001"
+              ],
+              "url_pattern": "/api/v1/users/me",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/lists",
+          "input_headers": [
+            "*"
+          ],
+          "method": "POST",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://lists-microservice-app-service:8003"
+              ],
+              "url_pattern": "/api/v1/lists",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/lists",
+          "input_headers": [
+            "*"
+          ],
+          "method": "GET",
+          "output_encoding": "json-collection",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://lists-microservice-app-service:8003"
+              ],
+              "url_pattern": "/api/v1/lists",
+              "encoding": "json",
+              "is_collection": true,
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/lists/{id}",
+          "input_headers": [
+            "*"
+          ],
+          "method": "GET",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://lists-microservice-app-service:8003"
+              ],
+              "url_pattern": "/api/v1/lists/{id}",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/lists/{id}",
+          "input_headers": [
+            "*"
+          ],
+          "method": "PUT",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://lists-microservice-app-service:8003"
+              ],
+              "url_pattern": "/api/v1/lists/{id}",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/lists/{id}",
+          "input_headers": [
+            "*"
+          ],
+          "method": "DELETE",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://lists-microservice-app-service:8003"
+              ],
+              "url_pattern": "/api/v1/lists/{id}",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/tasks",
+          "input_headers": [
+            "*"
+          ],
+          "method": "POST",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://lists-microservice-app-service:8003"
+              ],
+              "url_pattern": "/api/v1/tasks",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/tasks/{id}",
+          "input_headers": [
+            "*"
+          ],
+          "method": "GET",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://lists-microservice-app-service:8003"
+              ],
+              "url_pattern": "/api/v1/tasks/{id}",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/tasks/{id}",
+          "input_headers": [
+            "*"
+          ],
+          "method": "PUT",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://lists-microservice-app-service:8003"
+              ],
+              "url_pattern": "/api/v1/tasks/{id}",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/tasks/parent/{list_id}",
+          "input_headers": [
+            "*"
+          ],
+          "method": "PUT",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://lists-microservice-app-service:8003"
+              ],
+              "url_pattern": "/api/v1/tasks/parent/{list_id}",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }, 
+        {
+          "endpoint": "/api/v1/tasks",
+          "input_headers": [
+            "*"
+          ],
+          "method": "DELETE",
+          "output_encoding": "json",
+          "extra_config": {},
+          "backend": [
+            {
+              "host": [
+                "http://lists-microservice-app-service:8003"
+              ],
+              "url_pattern": "/api/v1/tasks",
+              "encoding": "json",
+              "extra_config": {
+                "backend/http": {
+                  "return_error_code": true
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: krakend-api-gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: krakend-api-gateway
+  template:
+    metadata:
+      labels:
+        app: krakend-api-gateway
+    spec:
+      containers:
+      - name: krakend-api-gateway
+        image: devopsfaith/krakend:latest
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: krakend-api-gateway-config-volume
+          mountPath: /etc/krakend
+      volumes:
+      - name: krakend-api-gateway-config-volume
+        configMap:
+          name: krakend-api-gateway-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: krakend-api-gateway-service
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: krakend-api-gateway
