@@ -93,13 +93,15 @@ This will open the product in your browser.
 
 All parts of the project are containerized and run in Kubernetes.
 
-1. Web client - React application
+1. Web client - React application [GitHub](https://github.com/bochkov-delvify-test/web-client)
 2. API Gateway - KrakenD
-3. Users microservice - Python FastAPI application to manage users
+3. Users microservice - Python FastAPI application to manage users [GitHub](https://github.com/bochkov-delvify-test/users-microservice)
     3.1. Users DB - PostgreSQL database
-4. Lists microservice - Python FastAPI application to manage lists and tasks
+4. Lists microservice - Python FastAPI application to manage lists and tasks [GitHub](https://github.com/bochkov-delvify-test/lists-microservice)
     4.1. Lists DB - PostgreSQL database
     4.2. Lists Scheduler - Python FastAPI application to manage scheduled notifications
-5. Notifications microservice - Python FastAPI application to send notifications
+5. Notifications microservice - Python FastAPI application to send notifications [GitHub](https://github.com/bochkov-delvify-test/notifications-microservice)
+
+* All microservices are created from template [GitHub](https://github.com/bochkov-delvify-test/microservice-template)
 
 ![ToDoList architecture.jpeg](ToDoList%20architecture.jpeg?raw=true "ToDoList architecture.jpeg")
