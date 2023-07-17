@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: microservice-microservice-template-config
+data:
+  SERVICE_NAME: "microservice-microservice-template"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: microservice-microservice-template-secret
+type: Opaque
+data:
+  SECRET_KEY: "cDlDVEFCRzE2cFMrVWJoZnNnRHpQSHE3MXZjaWphcXc5dmwwMXJaZ3dTS1hqY0RYYURnbGQrd3piY2hRaCtxUVc9PQ=="
+  TOKEN_ALGORITHM: "SFM1MTI="
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-microservice-template-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-microservice-template
+  template:
+    metadata:
+      labels:
+        app: microservice-microservice-template
+    spec:
+      containers:
+      - name: microservice-microservice-template
+        command: ["uvicorn", "delvify.main:ms", "--host", "0.0.0.0", "--port", "8000"]
+        image: ajijii/microservice-microservice-template
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: microservice-microservice-template-config
+        - secretRef:
+            name: microservice-microservice-template-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservice-microservice-template-service
+spec:
+  selector:
+    app: microservice-microservice-template
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
