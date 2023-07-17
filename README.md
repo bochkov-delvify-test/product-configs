@@ -67,7 +67,13 @@ minikube dashboard
 
 ## How to run
 
-To run the product locally you need to download this repo, install the requirements and run the `make start` command. 
+To run the product locally you need:
+1. Download this repo
+2. Install the requirements
+3. Open Docker Desktop
+4. Navigate to the root folder of this repo
+5. Run the `make start` command. 
+
 After all migrations ran and backend is running you will se in terminal:
 
 ```
@@ -75,7 +81,13 @@ Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
 ```
 
-Don't close this tab, open a new one and run `make run-frintend`. This will open the product in your browser.
+Don't close this tab! 
+
+6. Open a new tab
+7. Navigate to the root folder of this repo
+8. Run `make run-frintend`. 
+
+This will open the product in your browser.
 
 ## Architecture
 
